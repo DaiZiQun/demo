@@ -46,6 +46,7 @@ public class TestServiceImpl implements TestService {
     private String token;
 
     @Override
+    @Scheduled(cron = "* * 0/2 * * ?")
     public void test1() {
         long now = new Date().getTime();
         if ((now - time) > 7200000 || token == null) {
@@ -53,6 +54,7 @@ public class TestServiceImpl implements TestService {
             token = tokenResult.getAccess_token();
         }
         User user = JSON.parseObject(HttpUtils.getUrl(GETUSERS + token + "&next_openid="), User.class);
+
 
         String hefengResult = HttpUtils.getUrl(TIANQI + "key=" + key + "&location=120.37,30.30&lang=zh");
         String tianqi = "";
@@ -72,7 +74,7 @@ public class TestServiceImpl implements TestService {
         }
 
         for (String s : user.getData().getOpenid()) {
-            if(s.equals("ok-5Q59Q1v2FFddR5E_MygLolvEA")){
+            if(s.equals("ok-5Q55hLD8kgL9WVuwNvYC5LV6A")){
                 Map<String, Object> param = new HashMap<>();
                 Map<String, Object> data = new HashMap<>();
                 data.put("frist", new moban(tianqi, "#173177"));
