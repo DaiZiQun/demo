@@ -46,7 +46,7 @@ public class TestServiceImpl implements TestService {
     private String token;
 
     @Override
-    @Scheduled(cron = "* * 0/2 * * ?")
+    @Scheduled(cron = "* 0/5 * * * ?")
     public void test1() {
         long now = new Date().getTime();
         if ((now - time) > 7200000 || token == null) {
